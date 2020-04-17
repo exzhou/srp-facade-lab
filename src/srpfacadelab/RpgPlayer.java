@@ -9,9 +9,9 @@ public class RpgPlayer {
 
     private final IGameEngine gameEngine;
 
-    private int health;
+    private int health; // = new Health()
 
-    private int maxHealth;
+    private int maxHealth; // = health.max()
 
     private int armour;
 
@@ -59,9 +59,16 @@ public class RpgPlayer {
             return true;
         }
 
-        if (item.isRare())
-            gameEngine.playSpecialEffect("cool_swirly_particles");
+        if (item.isRare()){
+            //IMPLEMENTATION 1
+            if(item.isUnique()){
+                gameEngine.playSpecialEffect("blue_swirly");
+            }
+            else{
+                gameEngine.playSpecialEffect("cool_swirly_particles");
+            }
 
+        }
         inventory.add(item);
 
         calculateStats();
@@ -91,40 +98,43 @@ public class RpgPlayer {
         return sum;
     }
 
-    public void takeDamage(int damage) {
+    public void takeDamage(int damage) { //KEEP
         if (damage < armour) {
             gameEngine.playSpecialEffect("parry");
         }
-
         int damageToDeal = damage - armour;
+        //IMPLEMENTATION 2
+        if(carryingCapacity <= MAX_CARRYING_CAPACITY){
+            damageToDeal -= (damageToDeal* .25)
+        }
         health -= damageToDeal;
 
         gameEngine.playSpecialEffect("lots_of_gore");
     }
 
-    public int getHealth() {
-        return health;
-    }
+    // public int getHealth() {
+    //     return health;
+    // }
 
-    public void setHealth(int health) {
-        this.health = health;
-    }
+    // public void setHealth(int health) {
+    //     this.health = health;
+    // }
 
-    public int getMaxHealth() {
-        return maxHealth;
-    }
+    // public int getMaxHealth() {
+    //     return maxHealth;
+    // }
 
-    public void setMaxHealth(int maxHealth) {
-        this.maxHealth = maxHealth;
-    }
+    // public void setMaxHealth(int maxHealth) {
+    //     this.maxHealth = maxHealth;
+    // }
 
-    public int getArmour() {
-        return armour;
-    }
+    // public int getArmour() {
+    //     return armour;
+    // }
 
-    private void setArmour(int armour) {
-        this.armour = armour;
-    }
+    // private void setArmour(int armour) {
+    //     this.armour = armour;
+    // }
 
     public int getCarryingCapacity() {
         return carryingCapacity;
