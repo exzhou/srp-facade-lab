@@ -4,19 +4,8 @@ public class Inventory {
    
    private ArrayList<Item> inventory;
    
-   public Inventory(ArrayList<Item> inventory) {
-      this.inventory = armour;
-   }
-   public CarryCap(carryingCapacity) {
-      this.carryingCapacity = carryingCapacity;
-   }
-
-   public int getCarryingCapacity() {
-      return carryingCapacity;
-   }
-
-   private void setCarryingCapacity(int carryingCapacity) {
-      this.carryingCapacity = carryingCapacity;
+   public Inventory() {
+      this.inventory = new ArrayList<item>;
    }
 
    public int calculateInventoryWeight() {  //INVENTORY
@@ -27,6 +16,12 @@ public class Inventory {
       return sum;
    }
 
+   public void calculateStats(Armour armour) { //PLAYER / INV
+        for (Item i: inventory) {
+            armour.setArmour( armour.getArmour() + i.getArmour());
+        }
+    }
+
    public boolean checkIfItemExistsInInventory(Item item) { //INVENTORY
       for (Item i: inventory) {
          if (i.getId() == item.getId()){
@@ -34,5 +29,9 @@ public class Inventory {
          }
          return false;
       }
+   }
+
+   public void add(Item item){
+      inventory.add(item)
    }
 }
