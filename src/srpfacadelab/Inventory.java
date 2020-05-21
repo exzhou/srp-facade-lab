@@ -2,28 +2,17 @@ package srpfacadelab;
 
 public class Inventory {
    
-   private ArrayList<Item> inventory;
-   
-   public Inventory() {
-      this.inventory = new ArrayList<item>;
-   }
 
-   public int calculateInventoryWeight() {  //INVENTORY
+   public int calculateInventoryWeight(RpgPlayer player) {  //INVENTORY
       int sum=0;
-      for (Item i: inventory) {
+      for (Item i: player.getInventory()) {
          sum += i.getWeight();
       }
       return sum;
    }
 
-   public void calculateStats(Armour armour) { //PLAYER / INV
-        for (Item i: inventory) {
-            armour.setArmour( armour.getArmour() + i.getArmour());
-        }
-    }
-
-   public boolean checkIfItemExistsInInventory(Item item) { //INVENTORY
-      for (Item i: inventory) {
+   public boolean checkIfItemExistsInInventory(RpgPlayer player, Item item) { //INVENTORY
+      for (Item i: player.getInventory()) {
          if (i.getId() == item.getId()){
             return true;
          }
@@ -31,7 +20,14 @@ public class Inventory {
       }
    }
 
-   public void add(Item item){
-      inventory.add(item)
+   public void calculateStats(RpgPlayer player) { //PLAYER / INV
+      for (Item i: player.getInventory()) {
+         player.setArmour( player.getArmour() + i.getArmour());
+      }
+   }
+
+
+   public void add(Item item, RpgPlayer player){
+      player.inventory.add(item)
    }
 }
