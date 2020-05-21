@@ -30,41 +30,10 @@ public class RpgPlayer {
         this.Items = new Items();
         this.Damage = new Damage();
 
-    }
-
-
-    //Facade for the other class functions
-    public void useItem(Item item) {
-        return this.Items.useItem(item);
-    }
-
-    public boolean pickUpItem(Item item) {
-        return this.Items.pickUpItem(item, this);
-    }
-
-    private void calculateStats() {
-        return this.Inventory.calculateStats(this);
-    }
-
-    private boolean checkIfItemExistsInInventory(Item item) {
-        return this.Inventory.checkIfItemExistsInInventory(this, item);
-    }
-
-    private int calculateInventoryWeight() {
-        return this.Inventory.calculateInventoryWeight(this);
-    }
-
-    public void takeDamage(int damage) {
-        this.Damage.takeDamage(damage, this);
-    }
-    
-    
-    
-    //Added Getters and Setters after Refactor
+    } //Added Getters and Setters after Refactor
     public List<Item> getInventory() {
         return this.inventory;
     }
-
 
     //Initial Getters and Setters
     public int getHealth() {
@@ -97,5 +66,36 @@ public class RpgPlayer {
 
     private void setCarryingCapacity(int carryingCapacity) {
         this.carryingCapacity = carryingCapacity;
+    }
+}
+
+
+public class Facade {
+
+    public RpgPlayer player;
+    
+    //Facade for the other class functions
+    public void useItem(Item item) {
+        return player.Items.useItem(item);
+    }
+
+    public boolean pickUpItem(Item item) {
+        return player.Items.pickUpItem(item, player);
+    }
+
+    public void calculateStats() {
+        return player.Inventory.calculateStats(player);
+    }
+
+    public boolean checkIfItemExistsInInventory(Item item) {
+        return player.Inventory.checkIfItemExistsInInventory(player, item);
+    }
+
+    public int calculateInventoryWeight() {
+        return player.Inventory.calculateInventoryWeight(player);
+    }
+
+    public void takeDamage(int damage) {
+        player.Damage.takeDamage(damage, player);
     }
 }
