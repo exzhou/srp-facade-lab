@@ -41,7 +41,7 @@ public class Items {
 
         player.Inventory.add(item);
 
-        player.calculateStats();
+        Inventory.calculateStats(player);
 
         return true;
     }
